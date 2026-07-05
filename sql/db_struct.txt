@@ -1,0 +1,50 @@
+companies
+├── id (PK)
+
+roles
+├── id (PK)
+
+users
+├── id (PK)
+└── role_id (FK) → roles(id)
+
+fiscal_years
+├── id (PK)
+
+parties
+├── id (PK)
+
+product_categories
+├── id (PK)
+
+products
+├── id (PK)
+├── category_id (FK) → product_categories(id)
+└── fiscal_year_id (FK) → fiscal_years(id)
+
+invoices
+├── id (PK)
+├── party_id (FK) → parties(id)
+├── fiscal_year_id (FK) → fiscal_years(id)
+└── created_by (FK) → users(id)
+
+invoice_items
+├── id (PK)
+├── invoice_id (FK) → invoices(id) ON DELETE CASCADE
+└── product_id (FK) → products(id)
+
+tax_summary
+├── id (PK)
+└── invoice_id (FK) → invoices(id) ON DELETE CASCADE
+
+discounts
+├── id (PK)
+└── created_by (FK) → users(id)
+
+coupons
+├── id (PK)
+└── created_by (FK) → users(id)
+
+audit_logs
+├── id (PK)
+└── user_id (FK) → users(id)
